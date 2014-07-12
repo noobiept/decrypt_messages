@@ -1,0 +1,16 @@
+#LettersContainer td
+    {
+    font-size: 40px;
+    text-align: center;
+    padding: 5px 10px;
+    }
+
+.selected
+    {
+    color: rgba(237, 24, 21, 0.79);
+    }
+
+.button
+    {
+    cursor: pointer;
+    }
