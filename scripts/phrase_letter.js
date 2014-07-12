@@ -3,6 +3,7 @@
 function PhraseLetter( symbol, htmlElement )
 {
 htmlElement.innerHTML = symbol;
+htmlElement.className = 'button';
 htmlElement.onclick = (function(symbol)
     {
     return function()
@@ -39,6 +40,7 @@ if ( !found )
     this.htmlElement.innerHTML = this.symbol;
     }
 };
+
 
 
 window.PhraseLetter = PhraseLetter;

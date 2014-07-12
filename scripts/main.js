@@ -90,9 +90,19 @@ var letterElement = LETTERS_ELEMENTS[ letter ];
 
 if ( SELECTED_LETTER === null )
     {
-    letterElement.classList.add( 'selected' );
+        // select a letter
+    if ( SELECTED_SYMBOL === null )
+        {
+        letterElement.classList.add( 'selected' );
 
-    SELECTED_LETTER = { letter: letter, element: letterElement };
+        SELECTED_LETTER = { letter: letter, element: letterElement };
+        }
+
+        // both a letter and symbol selected
+    else
+        {
+        updateKey( letter, SELECTED_SYMBOL.symbol );
+        }
     }
 
 else
@@ -115,32 +125,93 @@ else
 
 function selectSymbol( symbol )
 {
-if ( SELECTED_LETTER === null )
-    {
+var symbolElements = [];
 
+for (var a = 0 ; a < PHRASE_ELEMENTS.length ; a++)
+    {
+    if ( symbol == PHRASE_ELEMENTS[ a ].symbol )
+        {
+        symbolElements.push( PHRASE_ELEMENTS[ a ].htmlElement );
+        }
+    }
+
+if ( SELECTED_SYMBOL === null )
+    {
+    if ( SELECTED_LETTER === null )
+        {
+        for (var a = 0 ; a < symbolElements.length ; a++)
+            {
+            symbolElements[ a ].classList.add( 'selected' );
+            }
+
+
+        SELECTED_SYMBOL = { symbol: symbol, elements: symbolElements };
+        }
+
+    else
+        {
+        updateKey( SELECTED_LETTER.letter, symbol );
+        }
     }
 
 else
     {
-        // clear the previous letter/symbol
-    var letters = _.keys( PLAYER_KEY );
-
-    for (var a = 0 ; a < letters.length ; a++)
+    for (var a = 0 ; a < SELECTED_SYMBOL.elements.length ; a++)
         {
-        var letter = letters[ a ];
-
-        if ( PLAYER_KEY[ letter ] == symbol )
-            {
-            PLAYER_KEY[ letter ] = '';
-            break;
-            }
+        SELECTED_SYMBOL.elements[ a ].classList.remove( 'selected' );
         }
 
-    PLAYER_KEY[ SELECTED_LETTER.letter ] = symbol;
+    if ( SELECTED_SYMBOL.symbol == symbol )
+        {
+        SELECTED_SYMBOL = null;
+        }
+
+    else
+        {
+        for (var a = 0 ; a < symbolElements.length ; a++)
+            {
+            symbolElements[ a ].classList.add( 'selected' );
+            }
+
+        SELECTED_SYMBOL = { symbol: symbol, elements: symbolElements };
+        }
+    }
+}
+
+
+function updateKey( selectedLetter, selectedSymbol )
+{
+    // clear the previous letter/symbol
+var letters = _.keys( PLAYER_KEY );
+
+for (var a = 0 ; a < letters.length ; a++)
+    {
+    var letter = letters[ a ];
+
+    if ( PLAYER_KEY[ letter ] == selectedSymbol )
+        {
+        PLAYER_KEY[ letter ] = '';
+        break;
+        }
+    }
+
+PLAYER_KEY[ selectedLetter ] = selectedSymbol;
+
+decryptMessage( PLAYER_KEY );
+
+if ( SELECTED_LETTER )
+    {
     SELECTED_LETTER.element.classList.remove( 'selected' );
     SELECTED_LETTER = null;
+    }
 
-    decryptMessage( PLAYER_KEY );
+if ( SELECTED_SYMBOL )
+    {
+    for (var a = 0 ; a < SELECTED_SYMBOL.elements.length ; a++)
+        {
+        SELECTED_SYMBOL.elements[ a ].classList.remove( 'selected' );
+        }
+    SELECTED_SYMBOL = null;
     }
 }
 
