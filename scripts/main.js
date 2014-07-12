@@ -191,11 +191,15 @@ for (var a = 0 ; a < letters.length ; a++)
     if ( PLAYER_KEY[ letter ] == selectedSymbol )
         {
         PLAYER_KEY[ letter ] = '';
+
+        LETTERS_ELEMENTS[ letter ].classList.remove( 'alreadyUsed' );
         break;
         }
     }
 
 PLAYER_KEY[ selectedLetter ] = selectedSymbol;
+
+LETTERS_ELEMENTS[ selectedLetter ].classList.add( 'alreadyUsed' );
 
 decryptMessage( PLAYER_KEY );
 
@@ -212,6 +216,12 @@ if ( SELECTED_SYMBOL )
         SELECTED_SYMBOL.elements[ a ].classList.remove( 'selected' );
         }
     SELECTED_SYMBOL = null;
+    }
+
+
+if ( isDecrypted() )
+    {
+    console.log( 'You won!' );
     }
 }
 
@@ -242,4 +252,25 @@ for (var a = 0 ; a < PHRASE_ELEMENTS.length ; a++)
 
     element.decrypt( key );
     }
+}
+
+
+function isDecrypted()
+{
+    // get the current message
+var messageContainer = document.querySelector( '#MessageContainer' );
+var length = messageContainer.childNodes.length;
+var currentMessage = '';
+
+for (var a = 0 ; a < length ; a++)
+    {
+    currentMessage += messageContainer.childNodes[ a ].innerHTML;
+    }
+
+if ( currentMessage.toLowerCase() === EXAMPLE.toLowerCase() )
+    {
+    return true;
+    }
+
+return false;
 }

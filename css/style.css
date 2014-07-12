@@ -10,7 +10,19 @@
     color: rgba(237, 24, 21, 0.79);
     }
 
+.alreadyUsed
+    {
+    opacity: 0.2;
+    }
+
 .button
     {
     cursor: pointer;
+    }
+
+#MessageContainer > *
+    {
+    text-align: center;
+    display: inline-block;
+    width: 20px;
     }
