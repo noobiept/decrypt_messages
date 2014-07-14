@@ -21,7 +21,7 @@ window.onload = function()
 generateKey();
 
 
-var isAlphanumeric = /^[a-z]$/i;
+var isEnglishAlphabet = /^[a-z]$/i;
 
     // add the message
 var messageContainer = document.querySelector( '#MessageContainer' );
@@ -32,7 +32,7 @@ for (var a = 0 ; a < EXAMPLE.length ; a++)
 
     var htmlElement = document.createElement( 'span' );
 
-    if ( isAlphanumeric.test( letter ) )
+    if ( isEnglishAlphabet.test( letter ) )
         {
         var symbol = KEY[ letter ];
 
@@ -81,6 +81,8 @@ for (var a = 0 ; a < LETTERS.length ; a++)
 
     LETTERS_ELEMENTS[ letter ] = td;
     }
+
+Menu.init();
 };
 
 
@@ -101,7 +103,10 @@ if ( SELECTED_LETTER === null )
         // both a letter and symbol selected
     else
         {
-        updateKey( letter, SELECTED_SYMBOL.symbol );
+        updateKey({
+                letter: letter,
+                symbol: SELECTED_SYMBOL.symbol
+            });
         }
     }
 
@@ -150,7 +155,10 @@ if ( SELECTED_SYMBOL === null )
 
     else
         {
-        updateKey( SELECTED_LETTER.letter, symbol );
+        updateKey({
+                letter: SELECTED_LETTER.letter,
+                symbol: symbol
+            });
         }
     }
 
@@ -179,8 +187,26 @@ else
 }
 
 
-function updateKey( selectedLetter, selectedSymbol )
+
+
+function updateKey( args )
 {
+if ( typeof args.letter === 'undefined' ||
+     typeof args.symbol === 'undefined' )
+    {
+    return;
+    }
+
+var selectedLetter = args.letter;
+var selectedSymbol = args.symbol;
+
+_.defaults( args,
+    {
+        add: true,
+        addToUndo: true
+    });
+
+
     // clear the previous letter/symbol
 var letters = _.keys( PLAYER_KEY );
 
@@ -197,9 +223,18 @@ for (var a = 0 ; a < letters.length ; a++)
         }
     }
 
-PLAYER_KEY[ selectedLetter ] = selectedSymbol;
 
-LETTERS_ELEMENTS[ selectedLetter ].classList.add( 'alreadyUsed' );
+if ( args.add === true )
+    {
+    PLAYER_KEY[ selectedLetter ] = selectedSymbol;
+
+    LETTERS_ELEMENTS[ selectedLetter ].classList.add( 'alreadyUsed' );
+    }
+
+else
+    {
+    PLAYER_KEY[ selectedLetter ] = '';
+    }
 
 decryptMessage( PLAYER_KEY );
 
@@ -218,13 +253,24 @@ if ( SELECTED_SYMBOL )
     SELECTED_SYMBOL = null;
     }
 
+if ( args.addToUndo === true )
+    {
+    UndoRedo.add( selectedLetter, selectedSymbol );
+    }
+
 
 if ( isDecrypted() )
     {
-    console.log( 'You won!' );
+    window.alert( 'You won!' );
+    restart();
     }
 }
 
+
+function restart()
+{
+
+}
 
 
 function generateKey()
@@ -273,4 +319,36 @@ if ( currentMessage.toLowerCase() === EXAMPLE.toLowerCase() )
     }
 
 return false;
+}
+
+
+function resetUserKey()
+{
+var letters = _.keys( PLAYER_KEY );
+
+for (var a = 0 ; a < letters.length ; a++)
+    {
+    PLAYER_KEY[ letters[ a ] ] = '';
+    }
+
+decryptMessage( PLAYER_KEY );
+
+    // remove the css classes for selected elements
+var selectedLetters = document.querySelectorAll( '.selected' );
+var alreadyUsedLetters = document.querySelectorAll( '.alreadyUsed' );
+
+for (var a = 0 ; a < selectedLetters.length ; a++)
+    {
+    selectedLetters[ a ].classList.remove( 'selected' );
+    }
+
+for (var a = 0 ; a < alreadyUsedLetters.length ; a++)
+    {
+    alreadyUsedLetters[ a ].classList.remove( 'alreadyUsed' );
+    }
+
+SELECTED_LETTER = null;
+SELECTED_SYMBOL = null;
+
+UndoRedo.clear();
 }
