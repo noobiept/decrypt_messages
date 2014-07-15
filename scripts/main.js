@@ -83,6 +83,7 @@ for (var a = 0 ; a < LETTERS.length ; a++)
     }
 
 Menu.init();
+UndoRedo.init();
 };
 
 

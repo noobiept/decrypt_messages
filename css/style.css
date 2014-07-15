@@ -20,9 +20,16 @@
     cursor: pointer;
     }
 
+.buttonNotAvailable
+    {
+    cursor: default;
+    opacity: 0.2;
+    }
+
 #MessageContainer > *
     {
     text-align: center;
     display: inline-block;
     width: 20px;
     }
+
