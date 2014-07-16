@@ -22,7 +22,7 @@ redo.onclick = UndoRedo.redo;
     // reset
 var reset = container.querySelector( '#Reset' );
 
-reset.onclick = resetUserKey;
+reset.onclick = Decrypt.resetUserKey;
 };
 
 

@@ -1,5 +1,10 @@
 function severalRandomInts( min, max, howMany )
 {
+if ( (max - min) < howMany )
+    {
+    return null;
+    }
+
 var numbers = [];
 
 while( numbers.length < howMany )

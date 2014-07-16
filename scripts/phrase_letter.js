@@ -8,7 +8,7 @@ htmlElement.onclick = (function(symbol)
     {
     return function()
         {
-        selectSymbol( symbol );
+        Decrypt.selectSymbol( symbol );
         };
     })( symbol );
 

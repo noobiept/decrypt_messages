@@ -44,7 +44,7 @@ var element = UNDO.pop();
 
 REDO.push( element );
 
-updateKey({
+Decrypt.updateKey({
         letter: element.letter,
         symbol: element.symbol,
         add: false,
@@ -79,7 +79,7 @@ var element = REDO.pop();
 
 UNDO.push( element );
 
-updateKey({
+Decrypt.updateKey({
         letter: element.letter,
         symbol: element.symbol,
         add: true,
@@ -127,7 +127,7 @@ if ( REDO.length > 0 )
     {
     REDO_HTML.classList.add( 'buttonNotAvailable' );
     }
-    
+
 UNDO.length = 0;
 REDO.length = 0;
 };
