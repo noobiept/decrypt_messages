@@ -29,6 +29,7 @@ for (var a = 0 ; a < letters.length ; a++)
 
     if ( symbol == this.symbol )
         {
+        this.htmlElement.classList.add( 'letterSet' );
         this.htmlElement.innerHTML = letter;
         found = true;
         break;
@@ -37,6 +38,7 @@ for (var a = 0 ; a < letters.length ; a++)
 
 if ( !found )
     {
+    this.htmlElement.classList.remove( 'letterSet' );
     this.htmlElement.innerHTML = this.symbol;
     }
 };
