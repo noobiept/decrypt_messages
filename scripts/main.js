@@ -5,11 +5,14 @@ window.onload = function()
 {
 PRELOAD = new createjs.LoadQueue();
 
-var manifest = [
+    // only put here messages (since we get the length of this array to know the amount of messages available)
+var messageManifest = [
         { id: 'message1', src: BASE_URL + 'messages/message1.txt' },
         { id: 'message2', src: BASE_URL + 'messages/message2.txt' }
     ];
 
-PRELOAD.loadManifest( manifest, true );
+Message.init( messageManifest.length );
+
+PRELOAD.loadManifest( messageManifest, true );
 PRELOAD.on( 'complete', Decrypt.init );
 };

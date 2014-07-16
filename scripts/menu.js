@@ -23,6 +23,11 @@ redo.onclick = UndoRedo.redo;
 var reset = container.querySelector( '#Reset' );
 
 reset.onclick = Decrypt.resetUserKey;
+
+    // new message
+var newMessage = container.querySelector( '#NewMessage' );
+
+newMessage.onclick = Decrypt.restart;
 };
 
 

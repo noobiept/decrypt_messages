@@ -24,37 +24,6 @@ var CURRENT_MESSAGE = '';
 
 Decrypt.init = function()
 {
-generateKey();
-
-var isEnglishAlphabet = /^[a-z]$/i;
-CURRENT_MESSAGE = PRELOAD.getResult( 'message1' );
-
-    // add the message
-var messageContainer = document.querySelector( '#MessageContainer' );
-
-for (var a = 0 ; a < CURRENT_MESSAGE.length ; a++)
-    {
-    var letter = CURRENT_MESSAGE[ a ].toLowerCase();
-
-    var htmlElement = document.createElement( 'span' );
-
-    if ( isEnglishAlphabet.test( letter ) )
-        {
-        var symbol = KEY[ letter ];
-
-        var phraseLetter = new PhraseLetter( symbol, htmlElement );
-
-        PHRASE_ELEMENTS.push( phraseLetter );
-        }
-
-    else
-        {
-        htmlElement.innerHTML = letter;
-        }
-
-    messageContainer.appendChild( htmlElement );
-    }
-
     // add the letters
 var lettersContainer = document.querySelector( '#LettersContainer' );
 var tableRow;
@@ -88,10 +57,47 @@ for (var a = 0 ; a < LETTERS.length ; a++)
     LETTERS_ELEMENTS[ letter ] = td;
     }
 
+
+addNewMessage();
 Menu.init();
 UndoRedo.init();
 };
 
+
+
+function addNewMessage()
+{
+generateKey();
+
+var isEnglishAlphabet = /^[a-z]$/i;
+CURRENT_MESSAGE = Message.getRandom();
+
+    // add the message
+var messageContainer = document.querySelector( '#MessageContainer' );
+
+for (var a = 0 ; a < CURRENT_MESSAGE.length ; a++)
+    {
+    var letter = CURRENT_MESSAGE[ a ].toLowerCase();
+
+    var htmlElement = document.createElement( 'span' );
+
+    if ( isEnglishAlphabet.test( letter ) )
+        {
+        var symbol = KEY[ letter ];
+
+        var phraseLetter = new PhraseLetter( symbol, htmlElement );
+
+        PHRASE_ELEMENTS.push( phraseLetter );
+        }
+
+    else
+        {
+        htmlElement.innerHTML = letter;
+        }
+
+    messageContainer.appendChild( htmlElement );
+    }
+}
 
 
 
@@ -272,15 +278,21 @@ if ( args.addToUndo === true )
 if ( isDecrypted() )
     {
     window.alert( 'You won!' );
-    restart();
+    Decrypt.restart();
     }
 };
 
 
-function restart()
+Decrypt.restart = function()
 {
-    //HERE
-}
+var messageContainer = document.querySelector( '#MessageContainer' );
+
+    // clear the previous message
+messageContainer.innerHTML = '';
+
+Decrypt.resetUserKey();
+addNewMessage();
+};
 
 
 function generateKey()
@@ -361,7 +373,7 @@ SELECTED_LETTER = null;
 SELECTED_SYMBOL = null;
 
 UndoRedo.clear();
-}
+};
 
 
 window.Decrypt = Decrypt;
