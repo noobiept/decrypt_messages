@@ -1,0 +1,7 @@
+Source:
+
+    http://www.diveintopython3.net
+
+License:
+
+    http://creativecommons.org/licenses/by-sa/3.0/

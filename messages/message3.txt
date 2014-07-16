@@ -1,0 +1,1 @@
+Every programming language has that one feature, a complicated thing intentionally made simple. If you’re coming from another language, you could easily miss it, because your old language didn't make that thing simple (because it was busy making something else simple instead).

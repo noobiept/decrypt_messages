@@ -1,0 +1,3 @@
+Python is fully object-oriented: you can define your own classes, inherit from your own or built-in classes, and instantiate the classes you’ve defined.
+
+Defining a class in Python is simple. As with functions, there is no separate interface definition. Just define the class and start coding. A Python class starts with the reserved word class, followed by the class name. Technically, that’s all that’s required, since a class doesn't need to inherit from any other class.

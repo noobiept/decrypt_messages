@@ -1,0 +1,2 @@
+eval() is evil.
+Well, the evil part is evaluating arbitrary expressions from untrusted sources. You should only use eval() on trusted input. Of course, the trick is figuring out what’s “trusted”.

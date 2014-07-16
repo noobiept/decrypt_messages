@@ -92,6 +92,11 @@ for (var a = 0 ; a < CURRENT_MESSAGE.length ; a++)
 
     else
         {
+        if ( letter === ' ' )
+            {
+            htmlElement.className = 'MessageSpace';
+            }
+
         htmlElement.innerHTML = letter;
         }
 

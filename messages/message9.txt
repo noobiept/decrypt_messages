@@ -1,0 +1,1 @@
+Kids today. So spoiled by these fast computers and fancy “dynamic” languages. Write first, ship second, debug third (if ever). In my day, we had discipline. Discipline, I say! We had to write programs by hand, on paper, and feed them to the computer on punchcards. And we liked it!

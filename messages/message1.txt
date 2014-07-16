@@ -1,1 +1,1 @@
-Hello there, how are you doing?
+Convention dictates that I should bore you with the fundamental building blocks of programming, so we can slowly work up to building something useful. Let's skip all that. Here is a complete, working Python program. It probably makes absolutely no sense to you. Don't worry about that, because you're going to dissect it line by line. But read through it first and see what, if anything, you can make of it.

@@ -31,7 +31,12 @@
     {
     text-align: center;
     display: inline-block;
-    width: 20px;
+    margin: 0;
+    }
+
+#MessageContainer .MessageSpace
+    {
+    width: 30px;
     }
 
 body > *
