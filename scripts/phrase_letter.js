@@ -1,6 +1,6 @@
 (function(window)
 {
-function PhraseLetter( symbol, htmlElement )
+function PhraseLetter( symbol, htmlElement, isUpperCase )
 {
 htmlElement.innerHTML = symbol;
 htmlElement.className = 'button';
@@ -14,6 +14,7 @@ htmlElement.onclick = (function(symbol)
 
 this.symbol = symbol;
 this.htmlElement = htmlElement;
+this.is_upper_case = isUpperCase;
 }
 
 
@@ -30,7 +31,17 @@ for (var a = 0 ; a < letters.length ; a++)
     if ( symbol == this.symbol )
         {
         this.htmlElement.classList.add( 'letterSet' );
-        this.htmlElement.innerHTML = letter;
+
+        if ( this.is_upper_case === true )
+            {
+            this.htmlElement.innerHTML = letter.toUpperCase();
+            }
+
+        else
+            {
+            this.htmlElement.innerHTML = letter.toLowerCase();
+            }
+
         found = true;
         break;
         }

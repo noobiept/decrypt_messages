@@ -69,7 +69,7 @@ function addNewMessage()
 {
 generateKey();
 
-var isEnglishAlphabet = /^[a-z]$/i;
+var isEnglishAlphabet = /^[a-zA-Z]$/i;
 CURRENT_MESSAGE = Message.getRandom();
 
     // add the message
@@ -77,7 +77,7 @@ var messageContainer = document.querySelector( '#MessageContainer' );
 
 for (var a = 0 ; a < CURRENT_MESSAGE.length ; a++)
     {
-    var letter = CURRENT_MESSAGE[ a ].toLowerCase();
+    var letter = CURRENT_MESSAGE[ a ];
 
     var htmlElement = document.createElement( 'span' );
 
@@ -88,9 +88,15 @@ for (var a = 0 ; a < CURRENT_MESSAGE.length ; a++)
 
     if ( isEnglishAlphabet.test( letter ) )
         {
-        var symbol = KEY[ letter ];
+        var symbol = KEY[ letter.toLowerCase() ];
+        var isUpperCase = false;
 
-        var phraseLetter = new PhraseLetter( symbol, htmlElement );
+        if ( letter === letter.toUpperCase() )
+            {
+            isUpperCase = true;
+            }
+
+        var phraseLetter = new PhraseLetter( symbol, htmlElement, isUpperCase );
 
         PHRASE_ELEMENTS.push( phraseLetter );
         }
