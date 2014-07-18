@@ -1,3 +1,8 @@
+body
+    {
+    font-family: monospace;
+    }
+
 #LettersContainer td
     {
     font-size: 40px;
@@ -41,6 +46,12 @@
 #Menu .button
     {
     padding: 2px 20px;
+    }
+
+#Menu
+    {
+    -webkit-user-select: none;
+    user-select: none;
     }
 
 #MessageContainer > *
