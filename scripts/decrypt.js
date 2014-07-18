@@ -81,6 +81,11 @@ for (var a = 0 ; a < CURRENT_MESSAGE.length ; a++)
 
     var htmlElement = document.createElement( 'span' );
 
+    if ( letter == '\n' )
+        {
+        messageContainer.appendChild( document.createElement( 'br' ) );
+        }
+
     if ( isEnglishAlphabet.test( letter ) )
         {
         var symbol = KEY[ letter ];
@@ -340,7 +345,7 @@ for (var a = 0 ; a < length ; a++)
     currentMessage += messageContainer.childNodes[ a ].innerHTML;
     }
 
-if ( currentMessage.toLowerCase() === CURRENT_MESSAGE.toLowerCase() )
+if ( currentMessage.toLowerCase().replace( /\s/g, '' ) === CURRENT_MESSAGE.toLowerCase().replace( /\s/g, '' ) )
     {
     return true;
     }
@@ -378,6 +383,38 @@ SELECTED_LETTER = null;
 SELECTED_SYMBOL = null;
 
 UndoRedo.clear();
+};
+
+/*
+    Sets a random valid letter, to help the player in completing the key
+ */
+
+Decrypt.help = function()
+{
+var incorrectLetters = [];
+
+for (var a = 0 ; a < LETTERS.length ; a++)
+    {
+    var letter = LETTERS[ a ];
+
+        // get all the incorrect letter/symbol pairs in the player's key
+    if ( KEY[ letter ] !== PLAYER_KEY[ letter ] )
+        {
+        incorrectLetters.push( letter );
+        }
+    }
+
+if ( incorrectLetters.length > 0 )
+    {
+    var position = getRandomInt( 0, incorrectLetters.length - 1 );
+
+    var randomLetter = incorrectLetters[ position ];
+
+    Decrypt.updateKey({
+            letter: randomLetter,
+            symbol: KEY[ randomLetter ]
+        });
+    }
 };
 
 

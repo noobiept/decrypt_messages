@@ -33,17 +33,27 @@
     opacity: 0.2;
     }
 
+.button:hover
+    {
+    background-color: rgba(143, 210, 163, 0.60);
+    }
+
+#Menu .button
+    {
+    padding: 2px 20px;
+    }
+
 #MessageContainer > *
     {
     text-align: center;
     display: inline-block;
     margin: 0;
-    min-width: 25px;
+    font-size: 20px;
     }
 
 #MessageContainer .MessageSpace
     {
-    width: 35px;
+    width: 30px;
     }
 
 body > *

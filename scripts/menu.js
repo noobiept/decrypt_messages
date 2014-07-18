@@ -28,6 +28,11 @@ reset.onclick = Decrypt.resetUserKey;
 var newMessage = container.querySelector( '#NewMessage' );
 
 newMessage.onclick = Decrypt.restart;
+
+    // help
+var help = container.querySelector( '#Help' );
+
+help.onclick = Decrypt.help;
 };
 
 
