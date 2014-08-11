@@ -148,6 +148,18 @@ else
 
     if ( SELECTED_LETTER.element === letterElement )
         {
+        var letter = SELECTED_LETTER.letter;
+        var symbol = PLAYER_KEY[ letter ];
+
+        if ( symbol !== '' )
+            {
+            Decrypt.updateKey({
+                    letter: letter,
+                    symbol: symbol,
+                    add: false
+                });
+            }
+
         SELECTED_LETTER = null;
         }
 
@@ -201,7 +213,7 @@ else
         SELECTED_SYMBOL.elements[ a ].classList.remove( 'selected' );
         }
 
-    if ( SELECTED_SYMBOL.symbol == symbol )
+    if ( SELECTED_SYMBOL.symbol === symbol )
         {
         SELECTED_SYMBOL = null;
         }
@@ -238,7 +250,6 @@ _.defaults( args,
         addToUndo: true
     });
 
-
     // clear the previous letter/symbol
 var letters = _.keys( PLAYER_KEY );
 
@@ -265,6 +276,7 @@ if ( args.add === true )
 
 else
     {
+    LETTERS_ELEMENTS[ selectedLetter ].classList.remove( 'alreadyUsed' );
     PLAYER_KEY[ selectedLetter ] = '';
     }
 
@@ -287,7 +299,7 @@ if ( SELECTED_SYMBOL )
 
 if ( args.addToUndo === true )
     {
-    UndoRedo.add( selectedLetter, selectedSymbol );
+    UndoRedo.add( selectedLetter, selectedSymbol, args.add );
     }
 
 

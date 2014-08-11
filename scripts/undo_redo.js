@@ -47,7 +47,7 @@ REDO.push( element );
 Decrypt.updateKey({
         letter: element.letter,
         symbol: element.symbol,
-        add: false,
+        add: !element.add,
         addToUndo: false
     });
 };
@@ -82,17 +82,18 @@ UNDO.push( element );
 Decrypt.updateKey({
         letter: element.letter,
         symbol: element.symbol,
-        add: true,
+        add: element.add,
         addToUndo: false
     });
 };
 
 
-UndoRedo.add = function( letter, symbol )
+UndoRedo.add = function( letter, symbol, add )
 {
 var element = {
         letter: letter,
-        symbol: symbol
+        symbol: symbol,
+        add: add
     };
 
 
