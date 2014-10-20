@@ -1,0 +1,11 @@
+{
+    "C:\\Users\\drk\\Dropbox\\projects\\decrypt_messages": [
+        "scripts/utilities.js",
+        "scripts/menu.js",
+        "scripts/decrypt.js",
+        "scripts/message.js",
+        "scripts/undo_redo.js",
+        "scripts/phrase_letter.js",
+        "scripts/main.js"
+    ]
+}

@@ -1,0 +1,17 @@
+{
+    "resultingFolder": "decrypt_messages",
+    "basePath": "..",
+    "files":
+        [
+            "css/",
+            "libraries/",
+            "messages/",
+            "manifest.json"
+        ],
+    "extensions":
+        [
+            ".css",
+            ".js",
+            ".txt"
+        ]
+}
