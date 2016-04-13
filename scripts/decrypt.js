@@ -1,9 +1,9 @@
-(function(window)
-{
-function Decrypt()
-{
+/*global Menu, UndoRedo, Message, PhraseLetter, severalRandomInts, getRandomInt*/
+'use strict';
 
-}
+var Decrypt;
+(function(Decrypt) {
+
 
 var LETTERS = [ 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' ];
 
@@ -13,7 +13,6 @@ var SYMBOLS = [ 'あ', 'い', 'う', 'え', 'お', 'か', 'き', 'く', 'け', '
 
 var KEY = {};
 var PLAYER_KEY = {};
-
 
 var SELECTED_LETTER = null;
 var SELECTED_SYMBOL = null;
@@ -27,7 +26,6 @@ Decrypt.init = function()
     // add the letters
 var lettersContainer = document.querySelector( '#LettersContainer' );
 var tableRow;
-
 
 for (var a = 0 ; a < LETTERS.length ; a++)
     {
@@ -57,12 +55,10 @@ for (var a = 0 ; a < LETTERS.length ; a++)
     LETTERS_ELEMENTS[ letter ] = td;
     }
 
-
 addNewMessage();
 Menu.init();
 UndoRedo.init();
 };
-
 
 
 function addNewMessage()
@@ -81,7 +77,7 @@ for (var a = 0 ; a < CURRENT_MESSAGE.length ; a++)
 
     var htmlElement = document.createElement( 'span' );
 
-    if ( letter == '\n' )
+    if ( letter === '\n' )
         {
         messageContainer.appendChild( document.createElement( 'br' ) );
         }
@@ -116,8 +112,6 @@ for (var a = 0 ; a < CURRENT_MESSAGE.length ; a++)
 }
 
 
-
-
 Decrypt.selectLetter = function( letter )
 {
 var letterElement = LETTERS_ELEMENTS[ letter ];
@@ -148,13 +142,13 @@ else
 
     if ( SELECTED_LETTER.element === letterElement )
         {
-        var letter = SELECTED_LETTER.letter;
-        var symbol = PLAYER_KEY[ letter ];
+        var selected = SELECTED_LETTER.letter;
+        var symbol = PLAYER_KEY[ selected ];
 
         if ( symbol !== '' )
             {
             Decrypt.updateKey({
-                    letter: letter,
+                    letter: selected,
                     symbol: symbol,
                     add: false
                 });
@@ -175,10 +169,11 @@ else
 Decrypt.selectSymbol = function( symbol )
 {
 var symbolElements = [];
+var a;
 
-for (var a = 0 ; a < PHRASE_ELEMENTS.length ; a++)
+for (a = 0 ; a < PHRASE_ELEMENTS.length ; a++)
     {
-    if ( symbol == PHRASE_ELEMENTS[ a ].symbol )
+    if ( symbol === PHRASE_ELEMENTS[ a ].symbol )
         {
         symbolElements.push( PHRASE_ELEMENTS[ a ].htmlElement );
         }
@@ -188,7 +183,7 @@ if ( SELECTED_SYMBOL === null )
     {
     if ( SELECTED_LETTER === null )
         {
-        for (var a = 0 ; a < symbolElements.length ; a++)
+        for (a = 0 ; a < symbolElements.length ; a++)
             {
             symbolElements[ a ].classList.add( 'selected' );
             }
@@ -208,7 +203,7 @@ if ( SELECTED_SYMBOL === null )
 
 else
     {
-    for (var a = 0 ; a < SELECTED_SYMBOL.elements.length ; a++)
+    for (a = 0 ; a < SELECTED_SYMBOL.elements.length ; a++)
         {
         SELECTED_SYMBOL.elements[ a ].classList.remove( 'selected' );
         }
@@ -220,7 +215,7 @@ else
 
     else
         {
-        for (var a = 0 ; a < symbolElements.length ; a++)
+        for (a = 0 ; a < symbolElements.length ; a++)
             {
             symbolElements[ a ].classList.add( 'selected' );
             }
@@ -229,8 +224,6 @@ else
         }
     }
 };
-
-
 
 
 Decrypt.updateKey = function( args )
@@ -256,12 +249,13 @@ if ( typeof args.addToUndo === 'undefined' )
 
     // clear the previous letter/symbol
 var letters = Object.keys( PLAYER_KEY );
+var a;
 
-for (var a = 0 ; a < letters.length ; a++)
+for (a = 0 ; a < letters.length ; a++)
     {
     var letter = letters[ a ];
 
-    if ( PLAYER_KEY[ letter ] == selectedSymbol )
+    if ( PLAYER_KEY[ letter ] === selectedSymbol )
         {
         PLAYER_KEY[ letter ] = '';
 
@@ -294,7 +288,7 @@ if ( SELECTED_LETTER )
 
 if ( SELECTED_SYMBOL )
     {
-    for (var a = 0 ; a < SELECTED_SYMBOL.elements.length ; a++)
+    for (a = 0 ; a < SELECTED_SYMBOL.elements.length ; a++)
         {
         SELECTED_SYMBOL.elements[ a ].classList.remove( 'selected' );
         }
@@ -343,7 +337,6 @@ for (var a = 0 ; a < positions.length ; a++)
 }
 
 
-
 function decryptMessage( key )
 {
 for (var a = 0 ; a < PHRASE_ELEMENTS.length ; a++)
@@ -379,8 +372,9 @@ return false;
 Decrypt.resetUserKey = function()
 {
 var letters = Object.keys( PLAYER_KEY );
+var a;
 
-for (var a = 0 ; a < letters.length ; a++)
+for (a = 0 ; a < letters.length ; a++)
     {
     PLAYER_KEY[ letters[ a ] ] = '';
     }
@@ -391,12 +385,12 @@ decryptMessage( PLAYER_KEY );
 var selectedLetters = document.querySelectorAll( '.selected' );
 var alreadyUsedLetters = document.querySelectorAll( '.alreadyUsed' );
 
-for (var a = 0 ; a < selectedLetters.length ; a++)
+for (a = 0 ; a < selectedLetters.length ; a++)
     {
     selectedLetters[ a ].classList.remove( 'selected' );
     }
 
-for (var a = 0 ; a < alreadyUsedLetters.length ; a++)
+for (a = 0 ; a < alreadyUsedLetters.length ; a++)
     {
     alreadyUsedLetters[ a ].classList.remove( 'alreadyUsed' );
     }
@@ -407,10 +401,10 @@ SELECTED_SYMBOL = null;
 UndoRedo.clear();
 };
 
+
 /*
     Sets a random valid letter, to help the player in completing the key
  */
-
 Decrypt.help = function()
 {
 var incorrectLetters = [];
@@ -440,6 +434,4 @@ if ( incorrectLetters.length > 0 )
 };
 
 
-window.Decrypt = Decrypt;
-
-}(window));
+})(Decrypt || (Decrypt = {}));

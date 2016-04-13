@@ -1,5 +1,7 @@
-(function(window)
-{
+/*global Decrypt*/
+'use strict';
+
+
 function PhraseLetter( symbol, htmlElement, isUpperCase )
 {
 htmlElement.innerHTML = symbol;
@@ -28,7 +30,7 @@ for (var a = 0 ; a < letters.length ; a++)
     var letter = letters[ a ];
     var symbol = key[ letter ];
 
-    if ( symbol == this.symbol )
+    if ( symbol === this.symbol )
         {
         this.htmlElement.classList.add( 'letterSet' );
 
@@ -53,9 +55,3 @@ if ( !found )
     this.htmlElement.innerHTML = this.symbol;
     }
 };
-
-
-
-window.PhraseLetter = PhraseLetter;
-
-}(window));

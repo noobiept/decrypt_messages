@@ -1,16 +1,18 @@
-(function(window)
-{
-function Message()
-{
+/*global PRELOAD, getRandomInt*/
+'use strict';
 
-}
+var Message;
+(function(Message) {
+
 
 var TOTAL = 0;
+
 
 Message.init = function( totalOfMessages )
 {
 TOTAL = totalOfMessages;
 };
+
 
 Message.getRandom = function()
 {
@@ -20,7 +22,4 @@ return PRELOAD.getResult( 'message' + position );
 };
 
 
-
-window.Message = Message;
-
-}(window));
+})(Message || (Message = {}));

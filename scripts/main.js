@@ -1,5 +1,10 @@
+/*global createjs, Message, Decrypt*/
+/*exported PRELOAD, BASE_URL*/
+'use strict';
+
 var PRELOAD = null;
 var BASE_URL = '';
+
 
 window.onload = function()
 {

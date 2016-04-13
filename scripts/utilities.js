@@ -1,3 +1,6 @@
+/*exported severalRandomInts, getRandomInt*/
+'use strict';
+
 function severalRandomInts( min, max, howMany )
 {
 if ( (max - min) < howMany )
@@ -15,7 +18,7 @@ while( numbers.length < howMany )
 
     for (var a = 0 ; a < numbers.length ; a++)
         {
-        if ( numbers[ a ] == randomNumber )
+        if ( numbers[ a ] === randomNumber )
             {
             alreadyIn = true;
             break;

@@ -1,9 +1,9 @@
-(function(window)
-{
-function UndoRedo()
-{
+/*global Decrypt*/
+'use strict';
 
-}
+var UndoRedo;
+(function(UndoRedo) {
+
 
 var UNDO = [];
 var REDO = [];
@@ -11,6 +11,7 @@ var REDO = [];
     // the html elements (to set/clear the css class)
 var UNDO_HTML = null;
 var REDO_HTML = null;
+
 
 UndoRedo.init = function()
 {
@@ -23,7 +24,6 @@ UndoRedo.undo = function()
 {
 if ( UNDO.length === 0 )
     {
-    console.log( 'Nothing to undo.' );
     return;
     }
 
@@ -57,7 +57,6 @@ UndoRedo.redo = function()
 {
 if ( REDO.length === 0 )
     {
-    console.log( 'Nothing to redo.' );
     return;
     }
 
@@ -73,7 +72,6 @@ if ( UNDO.length === 0 )
     {
     UNDO_HTML.classList.remove( 'buttonNotAvailable' );
     }
-
 
 var element = REDO.pop();
 
@@ -134,6 +132,4 @@ REDO.length = 0;
 };
 
 
-window.UndoRedo = UndoRedo;
-
-}(window));
+})(UndoRedo || (UndoRedo = {}));
