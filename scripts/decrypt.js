@@ -244,14 +244,18 @@ if ( typeof args.letter === 'undefined' ||
 var selectedLetter = args.letter;
 var selectedSymbol = args.symbol;
 
-_.defaults( args,
+if ( typeof args.add === 'undefined' )
     {
-        add: true,
-        addToUndo: true
-    });
+    args.add = true;
+    }
+
+if ( typeof args.addToUndo === 'undefined' )
+    {
+    args.addToUndo = true;
+    }
 
     // clear the previous letter/symbol
-var letters = _.keys( PLAYER_KEY );
+var letters = Object.keys( PLAYER_KEY );
 
 for (var a = 0 ; a < letters.length ; a++)
     {
@@ -374,7 +378,7 @@ return false;
 
 Decrypt.resetUserKey = function()
 {
-var letters = _.keys( PLAYER_KEY );
+var letters = Object.keys( PLAYER_KEY );
 
 for (var a = 0 ; a < letters.length ; a++)
     {

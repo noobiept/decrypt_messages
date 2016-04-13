@@ -20,7 +20,7 @@ this.is_upper_case = isUpperCase;
 
 PhraseLetter.prototype.decrypt = function( key )
 {
-var letters = _.keys( key );
+var letters = Object.keys( key );
 var found = false;
 
 for (var a = 0 ; a < letters.length ; a++)
