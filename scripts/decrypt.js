@@ -1,4 +1,4 @@
-/*global Menu, UndoRedo, Message, PhraseLetter, severalRandomInts, getRandomInt*/
+/*global Menu, UndoRedo, Message, PhraseLetter, Utilities*/
 'use strict';
 
 var Decrypt;
@@ -323,7 +323,7 @@ addNewMessage();
 
 function generateKey()
 {
-var positions = severalRandomInts( 0, SYMBOLS.length - 1, LETTERS.length );
+var positions = Utilities.severalRandomInts( 0, SYMBOLS.length - 1, LETTERS.length );
 
 for (var a = 0 ; a < positions.length ; a++)
     {
@@ -422,7 +422,7 @@ for (var a = 0 ; a < LETTERS.length ; a++)
 
 if ( incorrectLetters.length > 0 )
     {
-    var position = getRandomInt( 0, incorrectLetters.length - 1 );
+    var position = Utilities.getRandomInt( 0, incorrectLetters.length - 1 );
 
     var randomLetter = incorrectLetters[ position ];
 

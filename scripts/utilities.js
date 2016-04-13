@@ -1,7 +1,10 @@
-/*exported severalRandomInts, getRandomInt*/
 'use strict';
 
-function severalRandomInts( min, max, howMany )
+var Utilities;
+(function(Utilities) {
+
+
+Utilities.severalRandomInts = function( min, max, howMany )
 {
 if ( (max - min) < howMany )
     {
@@ -12,7 +15,7 @@ var numbers = [];
 
 while( numbers.length < howMany )
     {
-    var randomNumber = getRandomInt( min, max );
+    var randomNumber = Utilities.getRandomInt( min, max );
 
     var alreadyIn = false;
 
@@ -32,10 +35,13 @@ while( numbers.length < howMany )
     }
 
 return numbers;
-}
+};
 
 
-function getRandomInt( min, max )
+Utilities.getRandomInt = function( min, max )
 {
 return Math.floor( Math.random() * (max - min + 1) ) + min;
-}
+};
+
+
+})(Utilities || (Utilities = {}));

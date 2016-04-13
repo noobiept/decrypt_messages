@@ -1,4 +1,4 @@
-/*global PRELOAD, getRandomInt*/
+/*global PRELOAD, Utilities*/
 'use strict';
 
 var Message;
@@ -16,7 +16,7 @@ TOTAL = totalOfMessages;
 
 Message.getRandom = function()
 {
-var position = getRandomInt( 1, TOTAL );
+var position = Utilities.getRandomInt( 1, TOTAL );
 
 return PRELOAD.getResult( 'message' + position );
 };
