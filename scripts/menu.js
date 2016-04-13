@@ -28,6 +28,8 @@ newMessage.onclick = Decrypt.restart;
     // help
 var help = container.querySelector( '#Help' );
 help.onclick = Decrypt.help;
+
+container.classList.remove( 'hidden' );
 };
 
 

@@ -31,6 +31,19 @@ var messageManifest = [
 
 Message.init( messageManifest.length );
 
+var loading = document.getElementById( 'LoadingMessage' );
+
+PRELOAD.on( 'progress', function( event )
+    {
+    loading.innerHTML = 'Loading.. ' + (event.progress * 100 | 0) + '%';
+    });
+PRELOAD.on( 'complete', function()
+    {
+    loading.classList.add( 'hidden' );
+    Decrypt.init();
+    });
+
+
 PRELOAD.loadManifest( messageManifest, true );
-PRELOAD.on( 'complete', Decrypt.init );
+
 };
